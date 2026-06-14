@@ -9,8 +9,9 @@ CREATE TABLE [dbo].[RunHistory](
     [StartTime]     [datetime2](7)      NULL,
     [StopTime]      [datetime2](7)      NULL,
     [HostMachine]   [varchar](50)       NULL,
+    [HostInstance]  [varchar](50)       NULL,
     [ProcessLog]    [text]              NULL,
-    [Result]        [nchar](10)         NULL,
+    [Result]        [varchar](10)       NULL,
  CONSTRAINT [PK_RunHistory] PRIMARY KEY CLUSTERED 
 (
     [RunID] ASC
