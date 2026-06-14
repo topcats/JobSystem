@@ -1,0 +1,32 @@
+﻿name: Send SMTP Email
+
+on:
+  workflow_dispatch:
+    inputs:
+      subject:
+        description: 'Email subject'
+        required: false
+        default: 'Hello from GitHub Actions'
+      body:
+        description: 'Email body'
+        required: false
+        default: 'This email was sent from a GitHub Action.'
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send email via SMTP
+        uses: ./.github/workflow-actions/send-email
+        with:
+          smtp_server: smtp.example.com
+          smtp_port: 587
+          smtp_username: ${{ secrets.SMTP_USERNAME }}
+          smtp_password: ${{ secrets.SMTP_PASSWORD }}
+          from_address: sender@example.com
+          to: recipient@example.com
+          subject: ${{ github.event.inputs.subject }}
+          body: ${{ github.event.inputs.body }}
+          body_type: plain
+          use_tls: true
+          use_ssl: false
